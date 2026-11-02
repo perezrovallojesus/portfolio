@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jesús M. Pérez — UX/UI Designer &amp; Design Coordinator</title>
+  <meta name="description" content="UX/UI designer and design coordinator with 6+ years in product teams, from requirements to developer handoff.">
+  <meta name="author" content="Jesús M. Pérez">
+  <meta name="theme-color" content="#ECECE8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jesús M. Pérez — UX/UI Designer & Design Coordinator">
+  <meta property="og:description" content="UX/UI design and design coordination, from requirements to developer handoff.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="projects.js" defer></script>
+  <script src="wire.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <!-- Header: placa con remaches -->
+    <header class="topbar plate">
+      <a class="logo" href="#top" aria-label="Jesús M. Pérez, back to top">JMP <span class="logo-sub" aria-hidden="true">V3 / UNIT</span></a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="cta cta-sm" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email</a>
+    </header>
+
+    <main id="main">
+      <!-- ===== 1. HERO ===== -->
+      <section class="hero" id="top" aria-labelledby="hero-name">
+        <!-- Identidad + propuesta + CTA -->
+        <div class="pod hero-id">
+          <div class="pod-in">
+            <p class="label"><span class="dot" aria-hidden="true"></span>ID JMP · Portfolio 2026</p>
+            <h1 class="name" id="hero-name">Jesús M.<br>Pérez</h1>
+            <p class="role">UX/UI Designer &amp; Design Coordinator</p>
+            <p class="pitch">I take product ideas from requirements to developer handoff, and keep clients in the loop along the way.</p>
+            <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email me</a>
+            <div class="scope-wrap">
+              <p class="label">Scope</p>
+              <ol class="scope">
+                <li>Requirements</li><li>Flows</li><li>Hi-fi</li><li>Handoff</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ventana octagonal con disco orbital de alambre -->
+        <figure class="window" aria-hidden="true">
+          <svg class="window-svg" viewBox="0 0 600 600" focusable="false">
+            <defs>
+              <clipPath id="oct-clip"><polygon points="196,62 404,62 538,196 538,404 404,538 196,538 62,404 62,196"/></clipPath>
+              <pattern id="screen-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ECECE8" stroke-opacity=".08"/></pattern>
+            </defs>
+            <!-- marco blanco octagonal con bisel -->
+            <polygon class="frame-outer" points="170,0 430,0 600,170 600,430 430,600 170,600 0,430 0,170"/>
+            <polygon class="frame-bevel" points="182,26 418,26 574,182 574,418 418,574 182,574 26,418 26,182"/>
+            <polygon class="frame-screen" points="196,62 404,62 538,196 538,404 404,538 196,538 62,404 62,196"/>
+            <g clip-path="url(#oct-clip)">
+              <rect x="62" y="62" width="476" height="476" fill="url(#screen-grid)"/>
+              <g id="orbit"></g>
+            </g>
+            <!-- remaches y etiquetas técnicas -->
+            <g class="rivets">
+              <circle cx="180" cy="12" r="3.5"/><circle cx="420" cy="12" r="3.5"/><circle cx="588" cy="180" r="3.5"/><circle cx="588" cy="420" r="3.5"/>
+              <circle cx="420" cy="588" r="3.5"/><circle cx="180" cy="588" r="3.5"/><circle cx="12" cy="420" r="3.5"/><circle cx="12" cy="180" r="3.5"/>
+            </g>
+            <text class="frame-label" x="300" y="17" text-anchor="middle">WIN-01 · ORBIT VIEW</text>
+            <text class="frame-label" x="300" y="594" text-anchor="middle">AXIS Z · SLOW SPIN</text>
+            <rect class="frame-acc" x="232" y="40" width="10" height="10"/><rect class="frame-acc" x="358" y="40" width="10" height="10"/>
+            <text class="screen-label" x="214" y="92">ORB-01</text>
+            <text class="screen-label" x="386" y="92" text-anchor="end">JMP</text>
+            <circle class="screen-led" cx="402" cy="88" r="4"/>
+          </svg>
+        </figure>
+
+        <!-- Módulos de datos reales -->
+        <div class="hero-data">
+          <div class="pod data">
+            <div class="pod-in">
+              <p class="label">EXP / Product teams</p>
+              <p class="figure">6+ <span>yrs</span></p>
+              <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b>+</b></div>
+            </div>
+          </div>
+          <div class="pod data">
+            <div class="pod-in">
+              <p class="label">LANG / English</p>
+              <p class="figure">EN C2</p>
+              <ol class="scale" aria-label="CEFR scale, C2 is the highest level">
+                <li>A1</li><li>A2</li><li>B1</li><li>B2</li><li>C1</li><li class="on">C2</li>
+              </ol>
+              <p class="note">Spanish · native</p>
+            </div>
+          </div>
+          <div class="screen data data-tools">
+            <p class="label">TOOLS / Core</p>
+            <p class="tools-line">Figma / Adobe / WordPress</p>
+            <div class="bars" aria-hidden="true"><i style="--h:.9"></i><i style="--h:.6"></i><i style="--h:.75"></i><i style="--h:.4"></i><i style="--h:.85"></i><i style="--h:.55"></i><i style="--h:.7"></i><i style="--h:.35"></i><i style="--h:.8"></i><i style="--h:.5"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 2. WORK ===== -->
+      <section class="section" id="work" aria-labelledby="work-title">
+        <div class="sec-head plate">
+          <h2 id="work-title">Work</h2>
+          <p class="label">03 files · Process, roles, tools</p>
+          <div class="ruler" aria-hidden="true"></div>
+        </div>
+        <div class="projects" id="projects"></div>
+      </section>
+
+      <!-- ===== 3. ABOUT ===== -->
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="about">
+          <div class="pod about-text">
+            <div class="pod-in">
+              <h2 id="about-title">About</h2>
+              <p>UX/UI designer with 6+ years in product teams, from requirements to developer handoff.</p>
+              <p>As design coordinator at Shocklogic, I prioritize design in sprints and present decisions directly to clients.</p>
+            </div>
+          </div>
+          <div class="screen readings">
+            <p class="label">Readings / Toolset</p>
+            <ul>
+              <li><span>Figma</span><i></i><span>UI · Prototyping</span></li>
+              <li><span>Adobe Suite</span><i></i><span>Graphics</span></li>
+              <li><span>WordPress</span><i></i><span>Web</span></li>
+              <li><span>Wix</span><i></i><span>Web</span></li>
+              <li><span>ClickUp</span><i></i><span>Tasks</span></li>
+              <li><span>Notion</span><i></i><span>Docs</span></li>
+            </ul>
+          </div>
+          <div class="petrol-mod edu">
+            <p class="label">EDU / Degree</p>
+            <p class="edu-title">B.Sc. Computer Science</p>
+            <p class="note">UNET · 2017 — 2023</p>
+            <p class="note">CCNA · Cisco Networking Academy</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 4. CONTACT ===== -->
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="contact">
+          <div class="plate contact-main">
+            <p class="label"><span class="dot" aria-hidden="true"></span>Channel open</p>
+            <h2 id="contact-title">Let's talk</h2>
+            <a class="email" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">perezrovallojesus@gmail.com</a>
+            <div class="contact-actions">
+              <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email me</a>
+              <a class="link" href="https://www.linkedin.com/in/jesus-manuel-perez/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span> ↗</a>
+            </div>
+          </div>
+          <div class="petrol-mod dial-mod" aria-hidden="true">
+            <svg class="dial-svg" viewBox="0 0 300 300" focusable="false"><g id="dial"></g></svg>
+            <p class="label">DIAL / RX · Ready</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot plate">
+      <p class="label">© <span id="year">2026</span> Jesús M. Pérez</p>
+      <p class="label">V3 · Hand-coded HTML / CSS / JS</p>
+    </footer>
+  </div>
+</body>
+</html>
