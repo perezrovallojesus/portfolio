@@ -15,6 +15,12 @@ Portafolio one-page de Jesús M. Pérez (UX/UI Designer & Design Coordinator).
 - No inventar métricas, testimonios ni resultados. Donde falte info, usar marcadores `[TODO]` visibles (clase `.todo`).
 - No publicar el teléfono.
 
+## Diseño y estructura
+
+- El sistema visual (tokens, tipografía, componentes, reglas de color y movimiento) está en `DESIGN.md`. Hay que seguirlo en cualquier cambio visual.
+- Los case studies se editan solo en `projects.js` (array `window.PROJECTS`); `main.js` los renderiza.
+- `references/` guarda imágenes de referencia de terceros: no se sube al repo.
+
 ## Calidad
 
 - Responsive, modo claro/oscuro, WCAG AA, rápido, SEO básico + Open Graph.
