@@ -6,7 +6,9 @@
   <title>Jesús M. Pérez — UX/UI Designer &amp; Design Coordinator</title>
   <meta name="description" content="UX/UI designer and design coordinator with 6+ years in product teams, from requirements to developer handoff.">
   <meta name="author" content="Jesús M. Pérez">
-  <meta name="theme-color" content="#ECECE8">
+  <meta name="theme-color" content="#ECECE8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Jesús M. Pérez — UX/UI Designer & Design Coordinator">
   <meta property="og:description" content="UX/UI design and design coordination, from requirements to developer handoff.">
@@ -15,7 +17,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap">
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- Marca JS y aplica el tema guardado antes de pintar -->
+  <script>
+    document.documentElement.classList.add('js');
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
   <link rel="stylesheet" href="styles.css">
   <script src="projects.js" defer></script>
   <script src="wire.js" defer></script>
@@ -23,6 +29,20 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Patrón de fondo tipo cutting mat (decorativo; los números de regla los pone main.js) -->
+  <div class="mat" aria-hidden="true">
+    <div class="mat-ruler-x"></div>
+    <div class="mat-ruler-y"></div>
+    <div class="mat-nums"></div>
+    <svg class="mat-diag" viewBox="0 0 520 520" focusable="false">
+      <line x1="0" y1="0" x2="520" y2="300"/>
+      <line x1="0" y1="0" x2="520" y2="520"/>
+      <line x1="0" y1="0" x2="300" y2="520"/>
+      <path d="M180 0A180 180 0 0 1 0 180"/>
+    </svg>
+    <span class="mat-reg tl"></span><span class="mat-reg tr"></span><span class="mat-reg bl"></span><span class="mat-reg br"></span>
+  </div>
 
   <div class="wrap">
     <!-- Header: placa con remaches -->
@@ -33,9 +53,15 @@
           <li><a href="#work">Work</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="../v1/">v1</a></li>
         </ul>
       </nav>
-      <a class="cta cta-sm" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email</a>
+      <div class="top-actions">
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 3h18L3 21Z" fill="currentColor"/></svg>
+        </button>
+        <a class="cta cta-sm" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">Email</a>
+      </div>
     </header>
 
     <main id="main">
@@ -48,7 +74,7 @@
             <h1 class="name" id="hero-name">Jesús M.<br>Pérez</h1>
             <p class="role">UX/UI Designer &amp; Design Coordinator</p>
             <p class="pitch">I take product ideas from requirements to developer handoff, and keep clients in the loop along the way.</p>
-            <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email me</a>
+            <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">Email me</a>
             <div class="scope-wrap">
               <p class="label">Scope</p>
               <ol class="scope">
@@ -162,7 +188,7 @@
             <h2 id="contact-title">Let's talk</h2>
             <a class="email" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">perezrovallojesus@gmail.com</a>
             <div class="contact-actions">
-              <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="cta-led" aria-hidden="true"></span>Email me</a>
+              <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">Email me</a>
               <a class="link" href="https://www.linkedin.com/in/jesus-manuel-perez/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span> ↗</a>
             </div>
           </div>
