@@ -1,0 +1,4 @@
+# CV original: contiene teléfono, no se publica
+*.pdf
+.DS_Store
+.claude/
