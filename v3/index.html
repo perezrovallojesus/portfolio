@@ -6,9 +6,8 @@
   <title>Jesús M. Pérez — UX/UI Designer &amp; Design Coordinator</title>
   <meta name="description" content="UX/UI designer and design coordinator with 6+ years in product teams, from requirements to developer handoff.">
   <meta name="author" content="Jesús M. Pérez">
-  <meta name="theme-color" content="#ECECE8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#121212">
+  <meta name="color-scheme" content="dark light">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Jesús M. Pérez — UX/UI Designer & Design Coordinator">
   <meta property="og:description" content="UX/UI design and design coordination, from requirements to developer handoff.">
@@ -20,7 +19,10 @@
   <!-- Marca JS y aplica el tema guardado antes de pintar -->
   <script>
     document.documentElement.classList.add('js');
-    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    // Oscuro siempre, salvo que el usuario haya elegido claro antes
+    let t = 'dark';
+    try { if (localStorage.getItem('theme') === 'light') t = 'light'; } catch (e) {}
+    document.documentElement.dataset.theme = t;
   </script>
   <link rel="stylesheet" href="styles.css">
   <script src="projects.js" defer></script>
@@ -134,7 +136,7 @@
           </div>
           <div class="screen data data-tools">
             <p class="label">TOOLS / Core</p>
-            <p class="tools-line">Figma / Adobe / WordPress</p>
+            <p class="tools-line">Figma / Adobe / Claude Code</p>
             <div class="bars" aria-hidden="true"><i style="--h:.9"></i><i style="--h:.6"></i><i style="--h:.75"></i><i style="--h:.4"></i><i style="--h:.85"></i><i style="--h:.55"></i><i style="--h:.7"></i><i style="--h:.35"></i><i style="--h:.8"></i><i style="--h:.5"></i></div>
           </div>
         </div>
@@ -164,6 +166,7 @@
             <p class="label">Readings / Toolset</p>
             <ul>
               <li><span>Figma</span><i></i><span>UI · Prototyping</span></li>
+              <li><span>Claude Code</span><i></i><span>Layout &amp; front-end builds</span></li>
               <li><span>Adobe Suite</span><i></i><span>Graphics</span></li>
               <li><span>WordPress</span><i></i><span>Web</span></li>
               <li><span>Wix</span><i></i><span>Web</span></li>
@@ -190,11 +193,26 @@
             <div class="contact-actions">
               <a class="cta" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">Email me</a>
               <a class="link" href="https://www.linkedin.com/in/jesus-manuel-perez/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span> ↗</a>
+              <a class="link" href="https://behance.net/rovallo" rel="noopener" target="_blank">Behance<span class="visually-hidden"> (opens in a new tab)</span> ↗</a>
             </div>
           </div>
-          <div class="petrol-mod dial-mod" aria-hidden="true">
-            <svg class="dial-svg" viewBox="0 0 300 300" focusable="false"><g id="dial"></g></svg>
-            <p class="label">DIAL / RX · Ready</p>
+          <div class="petrol-mod signal-mod anim-host" aria-hidden="true">
+            <!-- Osciloscopio: la traza la genera main.js; se desplaza en bucle con CSS -->
+            <svg class="osc" viewBox="0 0 300 200" focusable="false">
+              <defs><clipPath id="osc-clip"><rect x="10" y="30" width="280" height="140" rx="8"/></clipPath></defs>
+              <circle class="osc-led" cx="16" cy="13" r="4"/>
+              <text class="osc-txt" x="27" y="16">RX · CH-01</text>
+              <g class="osc-level"><rect x="262" y="6" width="4" height="12"/><rect x="269" y="6" width="4" height="12"/><rect x="276" y="6" width="4" height="12"/><rect x="283" y="6" width="4" height="12"/></g>
+              <rect class="osc-screen" x="10" y="30" width="280" height="140" rx="8"/>
+              <path class="osc-grid" d="M45 30V170M80 30V170M115 30V170M185 30V170M220 30V170M255 30V170M10 65H290M10 135H290"/>
+              <path class="osc-axis" d="M150 30V170M10 100H290"/>
+              <g clip-path="url(#osc-clip)"><g class="osc-wave"><path class="osc-trace" id="osc-trace"/></g></g>
+              <line class="osc-cursor" x1="226" y1="34" x2="226" y2="166"/>
+              <path class="osc-tag" d="M220 30H232L226 37Z"/>
+              <text class="osc-txt" x="10" y="188">TIME / 20 MS</text>
+              <text class="osc-txt" x="290" y="188" text-anchor="end">SIG LOCK</text>
+            </svg>
+            <p class="label">SIGNAL / RX · Ready</p>
           </div>
         </div>
       </section>

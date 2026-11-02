@@ -1,17 +1,19 @@
-// v3: render de proyectos e ilustraciones animadas.
+// v3: render de proyectos, ilustraciones animadas y tema.
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasIO = 'IntersectionObserver' in window;
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 /* ---------- Proyectos desde projects.js ---------- */
 
 const thumbs = {
-  dial: () => Wire.dial(160, 92, 74, false),
+  dial: () => Wire.dial(160, 92, 74),
   sphere: () => Wire.sphere(),
   terrain: () => Wire.terrain()
 };
 
-document.getElementById('projects').innerHTML = (window.PROJECTS || []).map((p) => `
+const projects = window.PROJECTS || [];
+document.getElementById('projects').innerHTML = projects.map((p) => `
   <article class="pod project" aria-labelledby="p-${esc(p.id)}">
     <div class="pod-in">
       <div class="proj-top">
@@ -19,7 +21,7 @@ document.getElementById('projects').innerHTML = (window.PROJECTS || []).map((p) 
         <span class="label">${esc(p.company)}</span>
         <span class="dot" aria-hidden="true"></span>
       </div>
-      <div class="screen thumb" aria-hidden="true">
+      <div class="screen thumb anim-host" data-wire="${esc(p.wire)}" aria-hidden="true">
         <svg viewBox="0 0 320 180" focusable="false">${(thumbs[p.wire] || thumbs.dial)()}</svg>
         <span class="thumb-label">FIG. ${esc(p.id)}</span>
       </div>
@@ -36,55 +38,84 @@ document.getElementById('projects').innerHTML = (window.PROJECTS || []).map((p) 
     </div>
   </article>`).join('');
 
-/* ---------- Dial de contacto ---------- */
+/* ---------- Osciloscopio de contacto: traza periódica que CSS desplaza en bucle ---------- */
+// Periodo de 140 unidades: la traza mide 280 + 140 y al desplazarse -140 encaja sin salto.
 
-document.getElementById('dial').innerHTML = Wire.dial(150, 150, 120, true);
+(function buildTrace() {
+  const P = 140, pts = [];
+  for (let x = 10; x <= 10 + 280 + P; x += 2) {
+    const a = (2 * Math.PI * x) / P;
+    pts.push(`${x} ${(100 - (26 * Math.sin(a) + 9 * Math.sin(3 * a + 0.6) + 5 * Math.sin(7 * a))).toFixed(1)}`);
+  }
+  document.getElementById('osc-trace').setAttribute('d', 'M' + pts.join('L'));
+})();
 
-/* ---------- Disco orbital del hero: gira despacio y se pausa fuera de pantalla ---------- */
+/* ---------- Animaciones en bucle (un solo rAF, solo lo visible) ---------- */
+// Cada bucle acumula su propio tiempo mientras está visible; las animaciones CSS
+// de las miniaturas se pausan con .is-live (ver .anim-host en styles.css).
 
+const loops = [];
 const orbitEl = document.getElementById('orbit');
-let angle = 0.4, last = 0, running = false, rafId = 0;
+orbitEl.innerHTML = Wire.orbit(0.4);
+loops.push({ el: document.querySelector('.window'), t: 0, ready: true, render: (t) => { orbitEl.innerHTML = Wire.orbit(0.4 + t * 0.00011); } });
 
-function frame(ts) {
-  if (!running) return;
-  if (ts - last > 33) {                     // ~30 fps es suficiente para un giro lento
-    angle += reduceMotion ? 0 : (ts - (last || ts)) * 0.00011;
-    orbitEl.innerHTML = Wire.orbit(angle);
+document.querySelectorAll('.thumb').forEach((thumb) => {
+  const svg = thumb.querySelector('svg');
+  const kind = thumb.dataset.wire;
+  // La esfera gira y el terreno ondula (se redibujan); el dial se anima solo con CSS
+  if (kind === 'sphere') loops.push({ el: thumb, t: 0, ready: false, render: (t) => { svg.innerHTML = Wire.sphere(140, 92, 66, t * 0.00035, false); } });
+  if (kind === 'terrain') loops.push({ el: thumb, t: 0, ready: false, render: (t) => { svg.innerHTML = Wire.terrain(320, 180, t * 0.0011, false); } });
+});
+
+let last = 0;
+function tick(ts) {
+  const dt = Math.min(ts - (last || ts), 100);
+  if (ts - last >= 33 || !last) {                   // ~30 fps basta para movimientos lentos
+    loops.forEach((l) => { if (l.live && l.ready) { l.t += dt; l.render(l.t); } });
     last = ts;
   }
-  rafId = requestAnimationFrame(frame);
-}
-orbitEl.innerHTML = Wire.orbit(angle);
-
-if (!reduceMotion && 'IntersectionObserver' in window) {
-  new IntersectionObserver(([e]) => {
-    running = e.isIntersecting;
-    if (running) { last = 0; rafId = requestAnimationFrame(frame); } else cancelAnimationFrame(rafId);
-  }).observe(document.querySelector('.window'));
+  if (loops.some((l) => l.live)) requestAnimationFrame(tick); else last = 0;
 }
 
-/* ---------- Líneas que se dibujan al entrar en vista ---------- */
+/* ---------- Entrada (trazo) y visibilidad ---------- */
 
-const drawTargets = document.querySelectorAll('.thumb, .dial-mod');
-if (reduceMotion || !('IntersectionObserver' in window)) {
-  drawTargets.forEach((el) => el.classList.add('is-drawn'));
+const hosts = document.querySelectorAll('.thumb, .signal-mod');
+if (reduceMotion || !hasIO) {
+  hosts.forEach((el) => el.classList.add('is-drawn'));
 } else {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); } });
+  // Trazo de entrada una vez; al terminar, la miniatura pasa al bucle continuo
+  const drawIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-drawn');
+      drawIO.unobserve(e.target);
+      const l = loops.find((x) => x.el === e.target);
+      if (l) setTimeout(() => { l.ready = true; }, 1900);
+    });
   }, { threshold: 0.3 });
-  drawTargets.forEach((el) => io.observe(el));
+  hosts.forEach((el) => drawIO.observe(el));
+
+  // Pausa todo lo que sale de pantalla (rAF y animaciones CSS)
+  const liveIO = new IntersectionObserver((entries) => {
+    const wasIdle = !loops.some((l) => l.live);
+    entries.forEach((e) => {
+      e.target.classList.toggle('is-live', e.isIntersecting);
+      const l = loops.find((x) => x.el === e.target);
+      if (l) l.live = e.isIntersecting;
+    });
+    if (wasIdle && loops.some((l) => l.live)) requestAnimationFrame(tick);
+  });
+  [...hosts, document.querySelector('.window')].forEach((el) => liveIO.observe(el));
 }
 
-/* ---------- Tema claro/oscuro: sigue al sistema hasta que el usuario elige ---------- */
+/* ---------- Tema: oscuro por defecto; solo se recuerda si el usuario elige ---------- */
 
 const root = document.documentElement;
 const toggle = document.querySelector('.theme-toggle');
-const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const currentTheme = () => root.dataset.theme || (darkQuery.matches ? 'dark' : 'light');
+const currentTheme = () => (root.dataset.theme === 'light' ? 'light' : 'dark');
 
 function updateToggleLabel() {
-  const next = currentTheme() === 'dark' ? 'light' : 'dark';
-  toggle.setAttribute('aria-label', `Switch to ${next} theme`);
+  toggle.setAttribute('aria-label', `Switch to ${currentTheme() === 'dark' ? 'light' : 'dark'} theme`);
 }
 toggle.addEventListener('click', () => {
   const next = currentTheme() === 'dark' ? 'light' : 'dark';
@@ -92,7 +123,6 @@ toggle.addEventListener('click', () => {
   try { localStorage.setItem('theme', next); } catch (e) {}
   updateToggleLabel();
 });
-darkQuery.addEventListener('change', updateToggleLabel);
 updateToggleLabel();
 
 /* ---------- Números de regla del patrón de fondo ---------- */

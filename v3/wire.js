@@ -47,58 +47,63 @@
   }
 
   /* ---------- 2. Esfera de alambre doble (plataforma híbrida) ---------- */
-  function sphere(cx = 140, cy = 92, R = 66) {
+  // rot: giro sobre su eje (los meridianos se desplazan). draw: trazo de entrada.
+  function sphere(cx = 140, cy = 92, R = 66, rot = 0, draw = true) {
     const tilt = 0.38, ct = Math.cos(tilt), st = Math.sin(tilt);
-    const globe = (gx, gy, gr, cls) => {
+    const globe = (gx, gy, gr, spin) => {
       let o = '';
       const p = (lat, lon) => {
-        const x = Math.cos(lat) * Math.sin(lon), y = Math.sin(lat), zz = Math.cos(lat) * Math.cos(lon);
+        const x = Math.cos(lat) * Math.sin(lon + spin), y = Math.sin(lat), zz = Math.cos(lat) * Math.cos(lon + spin);
         return [gx + gr * x, gy - gr * (y * ct - zz * st)];
       };
       for (let la = -60; la <= 60; la += 20) {
         const pts = []; for (let k = 0; k <= 48; k++) pts.push(p((la * Math.PI) / 180, (k / 48) * TAU));
-        o += path(line(pts), cls, true);
+        o += path(line(pts), 'w', draw);
       }
       for (let lo = 0; lo < 180; lo += 22.5) {
         const pts = []; for (let k = 0; k <= 48; k++) pts.push(p((k / 48) * TAU, (lo * Math.PI) / 180));
-        o += path(line(pts), 'w-dim', true);
+        o += path(line(pts), 'w-dim', draw);
       }
       return o;
     };
-    let out = globe(cx, cy, R, 'w');
-    out += globe(cx + 112, cy + 18, R * 0.42, 'w');
-    out += path(`M${cx + R * 0.7} ${cy - 30}Q${cx + 95} ${cy - 70} ${cx + 112} ${cy - 10}`, 'w-acc', true);
-    out += `<circle class="w-sat" cx="${cx + 112}" cy="${cy - 10}" r="4"/>`;
+    // la esfera pequeña gira en sentido contrario y más rápido
+    let out = globe(cx, cy, R, rot) + globe(cx + 112, cy + 18, R * 0.42, -rot * 1.8);
+    const x0 = cx + R * 0.7, y0 = cy - 30, qx = cx + 95, qy = cy - 70, x1 = cx + 112, y1 = cy - 10;
+    out += path(`M${x0} ${y0}Q${qx} ${qy} ${x1} ${y1}`, 'w-acc', draw);
+    // un pulso recorre el enlace entre las dos esferas (punto sobre la curva de Bézier)
+    const t = (Math.sin(rot * 2.2) + 1) / 2, u = 1 - t;
+    out += `<circle class="w-sat" cx="${f(u * u * x0 + 2 * u * t * qx + t * t * x1)}" cy="${f(u * u * y0 + 2 * u * t * qy + t * t * y1)}" r="4"/>`;
     return out;
   }
 
   /* ---------- 3. Terreno ondulado en perspectiva ---------- */
-  function terrain(w = 320, h = 180) {
+  // phase: desplaza la ondulación hacia el observador. draw: trazo de entrada.
+  function terrain(w = 320, h = 180, phase = 0, draw = true) {
     const rows = 11, cols = 22, cx = w / 2, horizon = 34;
     const pt = (i, j) => {
       const depth = i / (rows - 1);                       // 0 lejos · 1 cerca
       const spread = 0.35 + depth * 0.75;
       const u = j / (cols - 1) - 0.5;
       const y0 = horizon + Math.pow(depth, 1.35) * (h - horizon - 14);
-      const elev = (Math.sin(u * 9 + depth * 3) * 0.6 + Math.sin(u * 3.3 - depth * 5) * 0.4) * (10 + depth * 18);
+      const elev = (Math.sin(u * 9 + depth * 3 - phase) * 0.6 + Math.sin(u * 3.3 - depth * 5 + phase * 0.6) * 0.4) * (10 + depth * 18);
       return [cx + u * w * spread, y0 - elev];
     };
     let out = '';
-    for (let i = 0; i < rows; i++) { const pts = []; for (let j = 0; j < cols; j++) pts.push(pt(i, j)); out += path(line(pts), 'w', true); }
-    for (let j = 0; j < cols; j += 2) { const pts = []; for (let i = 0; i < rows; i++) pts.push(pt(i, j)); out += path(line(pts), 'w-dim', true); }
+    for (let i = 0; i < rows; i++) { const pts = []; for (let j = 0; j < cols; j++) pts.push(pt(i, j)); out += path(line(pts), 'w', draw); }
+    for (let j = 0; j < cols; j += 2) { const pts = []; for (let i = 0; i < rows; i++) pts.push(pt(i, j)); out += path(line(pts), 'w-dim', draw); }
     const peak = pt(6, 14);
     out += `<circle class="w-sat" cx="${f(peak[0])}" cy="${f(peak[1] - 8)}" r="4"/>`;
-    out += path(`M${f(peak[0])} ${f(peak[1] - 4)}L${f(peak[0])} ${f(peak[1] + 22)}`, 'w-acc', true);
+    out += path(`M${f(peak[0])} ${f(peak[1] - 4)}L${f(peak[0])} ${f(peak[1] + 22)}`, 'w-acc', draw);
     return out;
   }
 
   /* ---------- 4. Dial de anillos concéntricos ---------- */
-  // spin: si es true, el anillo de marcas va en un grupo que gira con CSS
-  function dial(cx, cy, R, spin) {
+  // Anillos con clase "ring" (laten con CSS), marcas que giran y aguja que barre.
+  function dial(cx, cy, R) {
     let rings = '';
     for (let i = 1; i <= 5; i++) {
       const r = R * (0.22 + i * 0.15);
-      rings += path(`M${f(cx + r)} ${cy}A${f(r)} ${f(r)} 0 1 0 ${f(cx - r)} ${cy}A${f(r)} ${f(r)} 0 1 0 ${f(cx + r)} ${cy}`, i === 5 ? 'w' : 'w-dim', true);
+      rings += `<g class="ring" style="--i:${i}">` + path(`M${f(cx + r)} ${cy}A${f(r)} ${f(r)} 0 1 0 ${f(cx - r)} ${cy}A${f(r)} ${f(r)} 0 1 0 ${f(cx + r)} ${cy}`, i === 5 ? 'w' : 'w-dim', true) + '</g>';
     }
     let ticks = '';
     for (let k = 0; k < 60; k++) {
@@ -106,11 +111,12 @@
       const r1 = R * 1.0, r2 = R * (long ? 0.88 : 0.94);
       ticks += `M${f(cx + r1 * Math.cos(t))} ${f(cy + r1 * Math.sin(t))}L${f(cx + r2 * Math.cos(t))} ${f(cy + r2 * Math.sin(t))}`;
     }
-    const tickPath = `<path class="w" d="${ticks}"/>`;
-    const needle = path(`M${cx} ${cy}L${f(cx + R * 0.62 * Math.cos(-0.9))} ${f(cy + R * 0.62 * Math.sin(-0.9))}`, 'w-acc w-needle', true);
+    const origin = `transform-origin:${cx}px ${cy}px`;
+    const needle = path(`M${cx} ${cy}L${cx} ${f(cy - R * 0.62)}`, 'w-acc', true);
     return rings
-      + (spin ? `<g class="spin" style="transform-origin:${cx}px ${cy}px">${tickPath}</g>` : tickPath)
-      + needle + `<circle class="w-sat" cx="${cx}" cy="${cy}" r="${f(R * 0.06)}"/>`;
+      + `<g class="spin" style="${origin}"><path class="w" d="${ticks}"/></g>`
+      + `<g class="needle" style="${origin}">${needle}</g>`
+      + `<circle class="w-sat" cx="${cx}" cy="${cy}" r="${f(R * 0.06)}"/>`;
   }
 
   window.Wire = { orbit, sphere, terrain, dial };
