@@ -1,5 +1,5 @@
-// Proyectos del sitio publicado (copia de v3). "line" = una línea, máx. 20 palabras.
-// wire: miniatura de alambre ('dial' | 'sphere' | 'terrain'). link: null no muestra enlace.
+// Proyectos de v3: edita SOLO este array. "line" = una línea, máx. 20 palabras.
+// wire: miniatura de alambre ('dial' | 'sphere' | 'terrain'). link: null muestra [TODO].
 
 window.PROJECTS = [
   {

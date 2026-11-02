@@ -30,9 +30,9 @@ document.getElementById('projects').innerHTML = (window.PROJECTS || []).map((p) 
         <div><dt>Tools</dt><dd>${p.tools.map(esc).join(' · ')}</dd></div>
         <div><dt>Year</dt><dd>${esc(p.year)}</dd></div>
       </dl>
-      ${p.link
-        ? `<p class="proj-link"><a class="link" href="${esc(p.link)}" rel="noopener" target="_blank">View case ↗<span class="visually-hidden"> (opens in a new tab)</span></a></p>`
-        : ''}
+      <p class="proj-link">${p.link
+        ? `<a class="cta cta-sm" href="${esc(p.link)}" rel="noopener" target="_blank">View case ↗<span class="visually-hidden"> (opens in a new tab)</span></a>`
+        : '<span class="todo">[TODO: case link]</span>'}</p>
     </div>
   </article>`).join('');
 
@@ -74,5 +74,47 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
   }, { threshold: 0.3 });
   drawTargets.forEach((el) => io.observe(el));
 }
+
+/* ---------- Tema claro/oscuro: sigue al sistema hasta que el usuario elige ---------- */
+
+const root = document.documentElement;
+const toggle = document.querySelector('.theme-toggle');
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const currentTheme = () => root.dataset.theme || (darkQuery.matches ? 'dark' : 'light');
+
+function updateToggleLabel() {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  toggle.setAttribute('aria-label', `Switch to ${next} theme`);
+}
+toggle.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  root.dataset.theme = next;
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  updateToggleLabel();
+});
+darkQuery.addEventListener('change', updateToggleLabel);
+updateToggleLabel();
+
+/* ---------- Números de regla del patrón de fondo ---------- */
+// Una etiqueta por línea mayor (cada 5 módulos) en los bordes superior e izquierdo.
+// Se recalcula cuando cambia el tamaño de la página.
+
+const mat = document.querySelector('.mat');
+const matNums = mat.querySelector('.mat-nums');
+let matFrame = 0;
+
+function drawRulerNumbers() {
+  const mod = parseFloat(getComputedStyle(root).getPropertyValue('--mod')) || 12;
+  const step = mod * 5;
+  const w = mat.clientWidth, h = mat.clientHeight;
+  let html = '';
+  for (let x = step; x < w - step / 2; x += step) html += `<span style="left:${x + 3}px;top:12px">${Math.round(x / mod)}</span>`;
+  for (let y = step; y < h - step / 2; y += step) html += `<span style="left:13px;top:${y + 3}px">${Math.round(y / mod)}</span>`;
+  matNums.innerHTML = html;
+}
+const scheduleRuler = () => { cancelAnimationFrame(matFrame); matFrame = requestAnimationFrame(drawRulerNumbers); };
+if ('ResizeObserver' in window) new ResizeObserver(scheduleRuler).observe(mat);
+else window.addEventListener('resize', scheduleRuler);
+drawRulerNumbers();
 
 document.getElementById('year').textContent = new Date().getFullYear();
