@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jesús M. Pérez — UX/UI Designer &amp; Design Coordinator</title>
+  <meta name="description" content="UX/UI designer and design coordinator with 6+ years in product teams, from requirements to developer handoff.">
+  <meta name="author" content="Jesús M. Pérez">
+  <meta name="theme-color" content="#FBD74B">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jesús M. Pérez — UX/UI Designer & Design Coordinator">
+  <meta property="og:description" content="UX/UI design and design coordination, from requirements to developer handoff.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Mismas familias que v1 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@500;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="projects.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="frame">
+    <header class="bar">
+      <a class="logo" href="#top" aria-label="Jesús M. Pérez, back to top">JMP<span class="logo-v" aria-hidden="true">/V2</span></a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- HERO: una frase + un CTA. Elementos físicos: botón, LED, ventilación -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="tag">Jesús M. Pérez — UX/UI Designer &amp; Design Coordinator</p>
+          <h1 id="hero-title">I design product interfaces, from requirements to developer handoff.</h1>
+          <a class="key" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="key-face">Email me</span></a>
+        </div>
+
+        <div class="unit brackets" aria-hidden="true">
+          <div class="unit-top">
+            <span class="unit-label">UNIT JMP / 06+ YRS</span>
+            <span class="led-wrap"><span class="led"></span>ON</span>
+          </div>
+          <div class="unit-mark">JMP</div>
+          <div class="vent"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </section>
+
+      <!-- TRABAJO: la perilla selecciona el proyecto en foco -->
+      <section class="section" id="work" aria-labelledby="work-title">
+        <div class="sec-head">
+          <p class="tag"><span class="code">01</span> Selected work</p>
+          <h2 id="work-title">Work</h2>
+        </div>
+        <div class="work">
+          <ol class="projects" id="projects"></ol>
+          <div class="knob-panel">
+            <div class="knob" id="knob" role="slider" tabindex="0"
+                 aria-label="Project in focus" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" aria-valuetext="01">
+              <svg class="knob-scale" viewBox="-80 -80 160 160" aria-hidden="true" focusable="false">
+                <g class="ticks"></g>
+              </svg>
+              <div class="knob-body"><span class="knob-mark"></span></div>
+            </div>
+            <p class="tag knob-hint">Turn · drag · scroll · ← →</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOBRE MÍ: dos líneas -->
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="sec-head">
+          <p class="tag"><span class="code">02</span> About</p>
+          <h2 id="about-title" class="visually-hidden">About me</h2>
+        </div>
+        <div class="about">
+          <p class="about-text">UX/UI designer with 6+ years in product teams and a B.Sc. in Computer Science. I coordinate design in sprints and present decisions directly to clients.</p>
+          <p class="tag">English C2 · Spanish native · Figma · Adobe Suite · WordPress · Wix</p>
+        </div>
+      </section>
+
+      <!-- CONTACTO: email + LinkedIn -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-panel brackets">
+          <p class="tag"><span class="code code-inv">03</span> Contact <span class="led" aria-hidden="true"></span></p>
+          <h2 id="contact-title" class="visually-hidden">Contact</h2>
+          <a class="email" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together">perezrovallojesus@gmail.com</a>
+          <div class="contact-actions">
+            <a class="key" href="mailto:perezrovallojesus@gmail.com?subject=Let%27s%20work%20together"><span class="key-face">Email me</span></a>
+            <a class="link" href="https://www.linkedin.com/in/jesus-manuel-perez/" rel="noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span> ↗</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p class="tag">© <span id="year">2026</span> Jesús M. Pérez</p>
+      <p class="tag">V2</p>
+    </footer>
+  </div>
+</body>
+</html>
