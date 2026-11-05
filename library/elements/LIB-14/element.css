@@ -1,0 +1,18 @@
+/* LIB-14 Square LED (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.led { width: 8px; height: 8px; background: var(--orange); display: inline-block; animation: blink 2.4s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.status { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; letter-spacing: 0.1em; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

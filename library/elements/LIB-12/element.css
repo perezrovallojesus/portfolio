@@ -1,0 +1,23 @@
+/* LIB-12 Tools marquee (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.marquee { background: var(--block); color: var(--block-ink); overflow: hidden; border-bottom: 1px solid var(--line); }
+.marquee-track { display: flex; align-items: center; width: max-content; animation: marquee 42s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee span { font: 500 clamp(1rem, 2vw, 1.4rem)/1 var(--f-display); text-transform: uppercase; padding: 18px 0; white-space: nowrap; }
+.marquee i { width: 10px; height: 10px; background: var(--orange); margin: 0 28px; flex-shrink: 0; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+body { padding: 0; }
+.marquee { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

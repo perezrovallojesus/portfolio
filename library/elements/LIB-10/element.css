@@ -1,0 +1,23 @@
+/* LIB-10 Six-axis jack (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.jack { width: min(70%, 200px); height: auto; }
+.jack rect { fill: var(--panel-2); }
+.jack .jack-hole { fill: var(--block); }
+.jack .jack-hole:first-of-type { fill: var(--orange); }
+.jack-spin { transform-box: fill-box; transform-origin: center; animation: spin 28s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+body { background: var(--block); }
+.jack { height: 84vh; width: auto; max-width: 90vw; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

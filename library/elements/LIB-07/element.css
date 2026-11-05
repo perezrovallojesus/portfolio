@@ -1,0 +1,19 @@
+/* LIB-07 Soft LED (origen: v3) */
+:root {
+  --bg: #121212; --plate: #1B1B1B; --pearl: #262626; --seam: #333333; --rivet: #5E5E5A;
+  --ink: #ECECE8; --ink-soft: #A9A9A2; --screen: #0A0A0A; --screen-ink: #ECECE8; --screen-dim: #9A9A93;
+  --orange: #FF5B14; --on-accent: #121212; --frame: rgba(236, 236, 232, .32);
+  --mod-bg: #2A3028; --mod-line: #9FB09A; --mod-dim: rgba(159, 176, 154, .3); --mod-soft: #9FB09A; --mod-acc: #9FB09A;
+  --f-display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 2px rgba(255, 91, 20, .2); animation: soft-blink 2.8s ease-in-out infinite; flex-shrink: 0; }
+.proj-top .dot { margin-left: auto; }
+@keyframes soft-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+.label { display: flex; align-items: center; gap: 8px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

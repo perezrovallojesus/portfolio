@@ -1,0 +1,31 @@
+/* LIB-06 Contact dial (origen: v3) */
+:root {
+  --bg: #121212; --plate: #1B1B1B; --pearl: #262626; --seam: #333333; --rivet: #5E5E5A;
+  --ink: #ECECE8; --ink-soft: #A9A9A2; --screen: #0A0A0A; --screen-ink: #ECECE8; --screen-dim: #9A9A93;
+  --orange: #FF5B14; --on-accent: #121212; --frame: rgba(236, 236, 232, .32);
+  --mod-bg: #2A3028; --mod-line: #9FB09A; --mod-dim: rgba(159, 176, 154, .3); --mod-soft: #9FB09A; --mod-acc: #9FB09A;
+  --f-display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.w, .w-dim, .w-acc { fill: none; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.w { stroke: var(--screen-ink); stroke-width: 1; }
+.w-dim { stroke: var(--screen-ink); stroke-width: 1; stroke-opacity: .32; }
+.w-acc { stroke: var(--orange); stroke-width: 1.6; }
+.w-dash { stroke-dasharray: 3 6; }
+.w-sat { fill: var(--orange); }
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s ease; }
+.is-drawn .draw { stroke-dashoffset: 0; }.spin { animation: spin 60s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+body { background: var(--mod-bg); }
+.dial-mod { display: grid; justify-items: center; gap: 6px; }
+#art { height: 76vh; max-width: 90vw; }
+.label { margin: 0; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mod-soft); }
+.w, .w-dim { stroke: var(--mod-line); }
+.w-acc { stroke: var(--mod-line); }
+.w-sat { fill: var(--mod-line); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

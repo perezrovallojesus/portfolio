@@ -1,0 +1,40 @@
+/* LIB-09 Design unit (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.device { width: 100%; max-width: 440px; height: auto; }
+.d-shadow { fill: var(--hard-shadow); }
+.d-body { fill: var(--device); stroke: var(--ink); stroke-width: 2; }
+.d-base { fill: var(--panel-2); stroke: var(--ink); stroke-width: 2; }
+.d-hazard { fill: var(--orange); }
+.d-orange { fill: var(--orange); }
+.d-yellow { fill: var(--yellow); }
+.d-screen { fill: #121212; }
+.d-gridline { stroke: #2E2E2C; stroke-width: 1; }
+.d-wave {
+  fill: none; stroke: var(--orange); stroke-width: 2.5; stroke-linejoin: round;
+  stroke-dasharray: 80 340; animation: scan 3.2s linear infinite;
+}
+.d-text { fill: #E3E3E0; font: 9px var(--f-mono); letter-spacing: 1px; }
+.d-keys rect { fill: var(--panel-2); stroke: var(--ink); stroke-width: 1.5; }
+.d-keys .d-key-on { fill: var(--orange); }
+.d-knob { fill: var(--ink); }
+.d-knob-orange { fill: var(--orange); stroke: var(--ink); stroke-width: 2; }
+.d-knob-mark { stroke: var(--device); stroke-width: 3; }
+.d-vents rect { fill: var(--ink); }
+.d-label { fill: var(--ink); }
+.d-label-text { fill: var(--device); font: 700 10px var(--f-mono); letter-spacing: 1.2px; }
+.d-screw { fill: var(--ink); }
+@keyframes scan { from { stroke-dashoffset: 420; } to { stroke-dashoffset: 0; } }
+.device { width: min(90vw, 105vh); max-height: 92vh; max-width: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

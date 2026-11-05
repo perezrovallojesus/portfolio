@@ -1,0 +1,232 @@
+[
+  {
+    "id": "LIB-01",
+    "name": "Orbital disc",
+    "description": "Wireframe disc with rippled grid and orbiting satellite inside an octagonal frame.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 hero (WIN-01 · Orbit View)",
+    "motion": "Continuous slow rotation, blinking LED",
+    "files": [
+      "elements/LIB-01/index.html",
+      "elements/LIB-01/element.css",
+      "elements/LIB-01/element.js"
+    ]
+  },
+  {
+    "id": "LIB-02",
+    "name": "Ring dial",
+    "description": "Concentric rings pulsing in cascade, rotating tick ring and sweeping needle.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 Work: Shocklogic, \"Event systems & websites\"",
+    "motion": "Pulse, slow rotation, needle sweep",
+    "files": [
+      "elements/LIB-02/index.html",
+      "elements/LIB-02/element.css",
+      "elements/LIB-02/element.js"
+    ]
+  },
+  {
+    "id": "LIB-03",
+    "name": "Twin spheres",
+    "description": "Two counter-rotating wireframe globes linked by a travelling pulse.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 Work: Mocion, \"Hybrid event platform\"",
+    "motion": "Continuous 3D rotation, pulse along a curve",
+    "files": [
+      "elements/LIB-03/index.html",
+      "elements/LIB-03/element.css",
+      "elements/LIB-03/element.js"
+    ]
+  },
+  {
+    "id": "LIB-04",
+    "name": "Wave terrain",
+    "description": "Perspective wireframe terrain with waves flowing toward the viewer.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 Work: UENI, \"Client websites\"",
+    "motion": "Continuous grid ripple",
+    "files": [
+      "elements/LIB-04/index.html",
+      "elements/LIB-04/element.css",
+      "elements/LIB-04/element.js"
+    ]
+  },
+  {
+    "id": "LIB-05",
+    "name": "Signal scope",
+    "description": "Oscilloscope trace with blinking cursor, status LED and level bars.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 Contact (Signal / RX · Ready)",
+    "motion": "Looping trace scroll, blink, level bars",
+    "files": [
+      "elements/LIB-05/index.html",
+      "elements/LIB-05/element.css",
+      "elements/LIB-05/element.js"
+    ]
+  },
+  {
+    "id": "LIB-06",
+    "name": "Contact dial",
+    "description": "Concentric-ring dial with a slowly rotating tick ring and static needle.",
+    "origin": "v3",
+    "status": "removed",
+    "usedIn": "Nowhere. Replaced by LIB-05 in v3 Contact",
+    "motion": "Slow rotation, one-time line draw",
+    "files": [
+      "elements/LIB-06/index.html",
+      "elements/LIB-06/element.css",
+      "elements/LIB-06/element.js"
+    ]
+  },
+  {
+    "id": "LIB-07",
+    "name": "Soft LED",
+    "description": "Round orange status LED with a soft fade pulse.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 hero, Work cards, Contact, octagonal frame",
+    "motion": "Opacity pulse",
+    "files": [
+      "elements/LIB-07/index.html",
+      "elements/LIB-07/element.css"
+    ]
+  },
+  {
+    "id": "LIB-08",
+    "name": "Data meters",
+    "description": "Experience ticks, CEFR scale and tools bars that display real data.",
+    "origin": "v3",
+    "status": "in use",
+    "usedIn": "v3 hero data modules",
+    "motion": "None (static meters)",
+    "files": [
+      "elements/LIB-08/index.html",
+      "elements/LIB-08/element.css"
+    ]
+  },
+  {
+    "id": "LIB-09",
+    "name": "Design unit",
+    "description": "Retro device with an oscilloscope screen, keypad, knobs and vents.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 hero (Fig. 01)",
+    "motion": "Looping waveform scan",
+    "files": [
+      "elements/LIB-09/index.html",
+      "elements/LIB-09/element.css"
+    ]
+  },
+  {
+    "id": "LIB-10",
+    "name": "Six-axis jack",
+    "description": "Six-armed cross with one orange hole, rotating inside corner brackets.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 hero (Obj / 6-Axis)",
+    "motion": "Slow rotation",
+    "files": [
+      "elements/LIB-10/index.html",
+      "elements/LIB-10/element.css"
+    ]
+  },
+  {
+    "id": "LIB-11",
+    "name": "Data bars",
+    "description": "Row of orange and yellow bars gently rising and falling.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 hero (Obj / 6-Axis)",
+    "motion": "Looping vertical scale",
+    "files": [
+      "elements/LIB-11/index.html",
+      "elements/LIB-11/element.css"
+    ]
+  },
+  {
+    "id": "LIB-12",
+    "name": "Tools marquee",
+    "description": "Infinite band of tool names separated by orange squares.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1, below \"Where I've worked\"",
+    "motion": "Continuous horizontal scroll, pauses on hover",
+    "files": [
+      "elements/LIB-12/index.html",
+      "elements/LIB-12/element.css"
+    ]
+  },
+  {
+    "id": "LIB-13",
+    "name": "Typewriter caret",
+    "description": "Label typed letter by letter once, followed by a blinking caret.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 hero, role label",
+    "motion": "One-time typing, blinking caret",
+    "files": [
+      "elements/LIB-13/index.html",
+      "elements/LIB-13/element.css",
+      "elements/LIB-13/element.js"
+    ]
+  },
+  {
+    "id": "LIB-14",
+    "name": "Square LED",
+    "description": "Hard-edged orange status square with a stepped blink.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 hero (SYS OK) and footer",
+    "motion": "Stepped blink",
+    "files": [
+      "elements/LIB-14/index.html",
+      "elements/LIB-14/element.css"
+    ]
+  },
+  {
+    "id": "LIB-15",
+    "name": "Scroll reveal",
+    "description": "Modules fade and rise 16px the first time they enter the view.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 section heads, grids and case files",
+    "motion": "One-time fade and rise on scroll",
+    "files": [
+      "elements/LIB-15/index.html",
+      "elements/LIB-15/element.css",
+      "elements/LIB-15/element.js"
+    ]
+  },
+  {
+    "id": "LIB-16",
+    "name": "Hover invert cell",
+    "description": "Spec cell that flips to an orange fill with black text on hover or focus.",
+    "origin": "v1",
+    "status": "in use",
+    "usedIn": "v1 companies and services grids",
+    "motion": "Colour inversion on hover or focus (no idle motion)",
+    "files": [
+      "elements/LIB-16/index.html",
+      "elements/LIB-16/element.css"
+    ]
+  },
+  {
+    "id": "LIB-17",
+    "name": "Interactive 3D mesh",
+    "description": "Perspective wireframe disc with drag, inertia, zoom, reset, keyboard and live readout.",
+    "origin": "archived",
+    "status": "removed",
+    "usedIn": "Nowhere. Patch kept in archive/hero-interactive.patch",
+    "motion": "User-driven orbit and zoom with inertia, auto-spin when idle",
+    "files": [
+      "elements/LIB-17/index.html",
+      "elements/LIB-17/element.css",
+      "elements/LIB-17/element.js"
+    ]
+  }
+]

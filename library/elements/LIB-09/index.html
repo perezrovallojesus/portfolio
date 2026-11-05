@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIB-09 Design unit</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@500;800&display=swap">
+  <link rel="stylesheet" href="element.css">
+</head>
+<body>
+<svg class="device" viewBox="0 0 420 360" focusable="false">
+              <defs>
+                <pattern id="scr-grid" width="14" height="14" patternUnits="userSpaceOnUse">
+                  <path d="M14 0H0V14" fill="none" class="d-gridline"/>
+                </pattern>
+              </defs>
+              <!-- sombra dura -->
+              <path class="d-shadow" d="M58 76 H348 L398 126 V318 H58 Z"/>
+              <!-- cuerpo con bisel -->
+              <path class="d-body" d="M42 60 H332 L382 110 V302 H42 Z"/>
+              <!-- base -->
+              <rect class="d-base" x="82" y="302" width="260" height="30"/>
+              <rect class="d-hazard" x="82" y="326" width="260" height="6"/>
+              <!-- marco del monitor (naranja + amarillo) -->
+              <rect class="d-orange" x="62" y="82" width="214" height="168"/>
+              <rect class="d-yellow" x="226" y="82" width="50" height="70"/>
+              <!-- pantalla -->
+              <rect class="d-screen" x="78" y="98" width="182" height="136"/>
+              <rect x="78" y="98" width="182" height="136" fill="url(#scr-grid)"/>
+              <polyline class="d-wave" points="80,170 96,170 104,150 112,192 120,138 128,200 136,160 144,176 160,176 168,128 176,214 184,150 192,186 200,170 220,170 228,156 236,184 244,170 258,170"/>
+              <text class="d-text" x="88" y="116">SIG/CH-01</text>
+              <text class="d-text" x="210" y="226">OK</text>
+              <!-- teclado -->
+              <g class="d-keys">
+                <rect x="292" y="96" width="16" height="16"/><rect x="314" y="96" width="16" height="16"/><rect x="336" y="96" width="16" height="16"/>
+                <rect x="292" y="118" width="16" height="16"/><rect class="d-key-on" x="314" y="118" width="16" height="16"/><rect x="336" y="118" width="16" height="16"/>
+                <rect x="292" y="140" width="16" height="16"/><rect x="314" y="140" width="16" height="16"/><rect x="336" y="140" width="16" height="16"/>
+              </g>
+              <!-- perillas -->
+              <circle class="d-knob" cx="306" cy="196" r="15"/>
+              <line class="d-knob-mark" x1="306" y1="196" x2="306" y2="184"/>
+              <circle class="d-knob d-knob-orange" cx="344" cy="196" r="11"/>
+              <!-- ranuras de ventilación -->
+              <g class="d-vents">
+                <rect x="292" y="238" width="60" height="4"/><rect x="292" y="248" width="60" height="4"/><rect x="292" y="258" width="60" height="4"/><rect x="292" y="268" width="60" height="4"/>
+              </g>
+              <!-- etiqueta -->
+              <rect class="d-label" x="62" y="262" width="214" height="24"/>
+              <text class="d-label-text" x="72" y="278">UNIT JMP-06 · UX/UI</text>
+              <!-- tornillos -->
+              <circle class="d-screw" cx="54" cy="72" r="3"/><circle class="d-screw" cx="54" cy="290" r="3"/><circle class="d-screw" cx="370" cy="290" r="3"/>
+            </svg>
+</body>
+</html>

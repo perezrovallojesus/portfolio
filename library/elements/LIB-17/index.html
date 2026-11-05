@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIB-17 Interactive 3D mesh</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="element.css">
+  <script src="element.js" defer></script>
+</head>
+<body>
+<figure class="window" tabindex="0" role="group" aria-roledescription="3D viewer"
+                aria-label="Orbit view. Drag or use arrow keys to rotate. Plus and minus keys, pinch, or Ctrl or Cmd with scroll to zoom. Double-click or press 0 to reset.">
+          <svg class="window-svg" viewBox="0 0 600 600" focusable="false" aria-hidden="true">
+            <defs>
+              <clipPath id="oct-clip"><polygon points="196,62 404,62 538,196 538,404 404,538 196,538 62,404 62,196"/></clipPath>
+              <pattern id="screen-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ECECE8" stroke-opacity=".08"/></pattern>
+            </defs>
+            <!-- marco blanco octagonal con bisel -->
+            <polygon class="frame-outer" points="170,0 430,0 600,170 600,430 430,600 170,600 0,430 0,170"/>
+            <polygon class="frame-bevel" points="182,26 418,26 574,182 574,418 418,574 182,574 26,418 26,182"/>
+            <polygon class="frame-screen" points="196,62 404,62 538,196 538,404 404,538 196,538 62,404 62,196"/>
+            <g clip-path="url(#oct-clip)">
+              <rect x="62" y="62" width="476" height="476" fill="url(#screen-grid)"/>
+              <g id="orbit"></g>
+            </g>
+            <!-- remaches y etiquetas técnicas -->
+            <g class="rivets">
+              <circle cx="180" cy="12" r="3.5"/><circle cx="420" cy="12" r="3.5"/><circle cx="588" cy="180" r="3.5"/><circle cx="588" cy="420" r="3.5"/>
+              <circle cx="420" cy="588" r="3.5"/><circle cx="180" cy="588" r="3.5"/><circle cx="12" cy="420" r="3.5"/><circle cx="12" cy="180" r="3.5"/>
+            </g>
+            <text class="frame-label" x="300" y="17" text-anchor="middle">WIN-01 · ORBIT VIEW</text>
+            <text class="frame-label frame-readout" id="orbit-readout" x="300" y="589" text-anchor="middle">YAW 023° · PITCH +0° · ZOOM 1.0x</text>
+            <rect class="frame-acc" x="232" y="40" width="10" height="10"/><rect class="frame-acc" x="358" y="40" width="10" height="10"/>
+            <text class="screen-label" x="214" y="92">ORB-01</text>
+            <text class="screen-label" x="386" y="92" text-anchor="end">JMP</text>
+            <circle class="screen-led" cx="402" cy="88" r="4"/>
+          </svg>
+          <!-- Controles de la vista: dentro de la pantalla octagonal -->
+          <div class="win-ctrl" role="toolbar" aria-label="View controls">
+            <button type="button" data-act="out" aria-label="Zoom out">−</button>
+            <button type="button" data-act="in" aria-label="Zoom in">+</button>
+            <button type="button" data-act="reset" aria-label="Reset view">Reset</button>
+          </div>
+        </figure>
+</body>
+</html>

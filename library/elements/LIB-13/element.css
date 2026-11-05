@@ -1,0 +1,19 @@
+/* LIB-13 Typewriter caret (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.caret { display: inline-block; width: 0.6em; height: 1em; margin-left: 4px; vertical-align: -2px; background: var(--orange); animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.typer { margin: 0; font-size: 0.72rem; letter-spacing: 0.08em; text-align: center; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

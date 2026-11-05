@@ -1,0 +1,23 @@
+/* LIB-16 Hover invert cell (origen: v1) */
+:root {
+  --bg: #121212; --panel: #1B1B1A; --panel-2: #262624; --line: #3D3D3A;
+  --ink: #E3E3E0; --ink-soft: #A8A8A3; --block: #E3E3E0; --block-ink: #121212;
+  --device: #2C2C2A; --hard-shadow: #000000; --orange: #FF6A1A; --yellow: #F5C518; --on-accent: #121212;
+  --fs-num: 3rem; --fs-label: 0.72rem;
+  --f-display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; place-items: center; padding: 12px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 0.9rem/1.5 var(--f-mono); }
+.inv { transition: background-color .12s ease, color .12s ease; }
+.inv:hover, .inv:focus-within { background: var(--orange); color: var(--on-accent); }
+.inv:hover .tag, .inv:focus-within .tag,
+.inv:hover p { color: var(--on-accent); }
+.inv:hover .big-num, .inv:focus-within .big-num { -webkit-text-stroke-color: var(--on-accent); }
+.cell { display: grid; gap: 10px; padding: 24px; width: min(90vw, 280px); background: var(--bg); border: 1px solid var(--line); color: inherit; text-decoration: none; }
+.tag { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--ink-soft); }
+.company { font: 800 1.3rem/1 var(--f-display); text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
